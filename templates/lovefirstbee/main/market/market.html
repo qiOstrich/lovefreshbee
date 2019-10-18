@@ -1,0 +1,178 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lovefirstbee/main/market/css/market.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    <script type="text/javascript" src="{% static 'lovefirstbee/main/market/js/market.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    {{ block.super }}
+    闪购
+{% endblock %}
+
+{% block header %}
+    <header></header>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div id="market">
+        <aside>
+            <ul>
+                {% for types in foodtype %}
+                    <li>
+                        {% if typeid == types.typeid %}
+                            <span class="yellowSlide"></span>
+                        {% endif %}
+
+                        <a href="{% url 'marketApp:market' %}?typeid={{ types.typeid }}">{{ types.typename }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </aside>
+        <nav>
+            <ul>
+                <li id="alltype"><span>全部分类 <span class="glyphicon glyphicon-chevron-down"></span></span></li>
+                <li id="commonsort"><span>综合排序 <span class="glyphicon glyphicon-chevron-down"></span></span></li>
+            </ul>
+
+        </nav>
+
+        <section>
+            <menu>
+                <ul>
+                    {% for good in allgoods %}
+                        <li>
+                            <div>
+                                <a>
+                                    <img src="/static{{ good.productimg }}" alt="">
+                                    <div class="shoppingInfo">
+                                        <h6>{{ good.productlongname }}</h6>
+                                    </div>
+                                    <span class="detailTag" style="height:20px;">
+                                        <span>精选</span>
+                                        <span></span>
+
+                                    </span>
+                                    <div>
+
+                                        <span class="unit">{{ good.specifics }}</span>
+
+                                        <span class="price">
+                                            <span>￥{{ good.price }}</span>
+                                            <s>{{ good.marketprice }}</s>
+                                        </span>
+
+
+                                    </div>
+
+                                </a>
+                            </div>
+
+                            <section>
+                                <button class="subShopping" goodsid="{{ good.id }}">-</button>
+                                <span>0</span>
+                                <button class="addShopping" goodsid="{{ good.id }}">+</button>
+                            </section>
+
+                        </li>
+                    {% endfor %}
+
+                </ul>
+                <div id="alltype_second" style="display: none">
+                    <div>
+                        {% for childtype in childtypes %}
+                            {% if childtype.1 == '0' %}
+                                <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&sort={{ sort }}">
+                                    <span>{{ childtype.0 }}</span>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&childcid={{ childtype.1 }}&sort={{ sort }}">
+                                    <span>{{ childtype.0 }}</span>
+                                </a>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div id="commonsort_second" style="display: none">
+                    <div><a href="{% url 'marketApp:market' %}?typeid={{ typeid }}">
+                        <span>综合排序</span>
+                    </a>
+
+                        {% if childcid %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&childcid={{ childcid }}&sort=1">
+                        {% else %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&sort=1">
+                        {% endif %}
+                        <span>价格升序</span>
+                        </a>
+
+                        {% if childcid %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&childcid={{ childcid }}&sort=2">
+                        {% else %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&sort=2">
+                        {% endif %}
+                        <span>价格降序</span>
+                        </a>
+
+                        {% if childcid %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&childcid={{ childcid }}&sort=3">
+                        {% else %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&sort=3">
+                        {% endif %}
+                        <span>销量升序</span>
+
+                        {% if childcid %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&childcid={{ childcid }}&sort=4">
+                        {% else %}
+                            <a href="{% url 'marketApp:market' %}?typeid={{ typeid }}&sort=4">
+                        {% endif %}
+                        <span>销量降序</span>
+                        </a>
+                    </div>
+            </menu>
+        </section>
+
+        {#        <section style="overflow: auto">#}
+        {#            <menu>#}
+        {#                <div>#}
+        {#                    <ul>#}
+        {#                        {% for good in allgoods %}#}
+        {#                            <li>#}
+        {#                                <div>#}
+        {#                                    <a>#}
+        {#                                        <span><img src="/static{{ good.productimg }}" alt=""></span>#}
+        {#                                        <span>{{ good.productlongname }}</span>#}
+
+
+        {##}
+        {##}
+        {#                                    </a>#}
+        {#                                </div>#}
+        {#                            </li>#}
+        {#                        {% endfor %}#}
+        {#                    </ul>#}
+        {#                </div>#}
+        {#            </menu>#}
+        {#        </section>#}
+
+
+    </div>
+
+{% endblock %}
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+
+
+
+

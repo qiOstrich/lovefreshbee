@@ -1,0 +1,126 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+    购物车
+{% endblock %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lovefirstbee/main/cart/css/cart.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'lovefirstbee/main/cart/js/cart.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    <header></header>
+{% endblock %}
+
+{% block  content %}
+    {{ block.super }}
+    <div id="cart">
+        <h3>我的购物车</h3>
+
+        <div class="full">
+            <section>
+                {#收货信息#}
+                <ul>
+                    <li><span>收货人：</span><span>{{ user.name }}</span></li>
+                    <li><span>手机号：</span><span>110</span></li>
+                    <li><span>地址：</span><span>在这</span></li>
+                </ul>
+                {#凑单条#}
+                <div class="bill">
+
+                    <p>闪送超市</p>
+                    <p>免费送货</p>
+                    <a href="">凑单专区</a>
+
+                </div>
+                {#收货时间条#}
+                <div class="delivery">
+                    <span>收货时间：</span>
+                    <span>一小时送达</span>
+                    <a href="">可预订时间></a>
+
+                </div>
+                {#备注区#}
+                <div class="delivery">
+                    <span>收货备注：</span>
+                    <input type="text" name="goods" placeholder="特殊要求">
+                </div>
+
+                {#商品列表#}
+                {% if goods %}
+                    {% for production in goods %}
+
+
+
+                        <div class="menuList">
+                            {% if production.2 == 1 %}
+                                <div class="confirm" goods_id="{{ production.0.id }}">
+                                    <span><span>√</span></span>
+                                </div>
+                            {% else %}
+                                <div class="confirm" goods_id="{{ production.0.id }}">
+                                    <span><span></span></span>
+                                </div>
+                            {% endif %}
+
+                            {% if production.1 >= 1 %}
+                                <a href="" id="current_production_a">
+                                    <img src="/static{{ production.0.productimg }}" alt="">
+                                    <p>{{ production.0.productlongname }}</p>
+                                    <p>￥{{ production.0.price }}</p>
+
+                                </a>
+                                <section id="current_production">
+                                    <button class="subShopping" goodsid="{{ production.0.id }}">-</button>
+                                    <span>{{ production.1 }}</span>
+                                    <button class="addShopping" goodsid="{{ production.0.id }}">+</button>
+                                </section>
+                            {% elif production.1 == 0 %}
+
+                            {% endif %}
+
+
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {#确认购买条#}
+                <div class="payTheBill">
+                    <div class="confirm" id="all_toggle" all_select="{{ all_select }}">
+                        {% if all_select %}
+
+                            <span><span>√</span></span>
+
+                        {% else %}
+
+                            <span><span></span></span>
+
+                        {% endif %}
+                    </div>
+
+                    <p>
+                        <span>全选</span>
+                        <span>总计：</span>
+
+                        <span id="total_price">{{ total_price }}</span>
+                    </p>
+                    <a href="{% url 'booksApp:bookGoods' %}">确认购买</a>
+                </div>
+
+
+            </section>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

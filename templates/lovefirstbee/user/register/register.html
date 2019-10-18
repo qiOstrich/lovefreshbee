@@ -1,0 +1,57 @@
+{% extends 'base_user.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+    注册
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'lovefirstbee/user/register/js/register.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="container">
+        <form action="{% url 'userApp:register' %}" method="post" class="navbar-form navbar-left"
+              enctype="multipart/form-data" onsubmit="return password_md5()">
+            {% csrf_token %}
+            <div>
+
+                <div class="form-group">
+                    <span>用户名：</span>
+                    <input type="text" id="register_userid" class="form-control" placeholder="用户名为5至32位字母" name="userid">
+                    <span id="namespan"></span>
+                </div>
+                <div class="form-group">
+                    <span>邮箱：</span>
+                    <input type="email" id="register_email" class="form-control" placeholder="邮箱不能为空哦" name="email">
+                    <span id="emailspan"></span>
+                </div>
+                <div class="form-group">
+                    <span>密码：</span>
+                    <input type="password" id="register_userpwd" class="form-control" placeholder="密码不能为空哦" name="userpwd">
+                </div>
+                <div class="form-group">
+                    <span>确认密码：</span>
+                    <input type="password" id="register_reuserpwd" class="form-control" placeholder="请确认密码" name="reuserpwd">
+                    <span id="pwdspan"></span>
+                </div>
+                <div style="height: 2rem;">
+                    <span>上传头像</span>
+                    <input type="file" name="headimg" id="register_headerimg">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="register_submit" disabled>
+                    点击注册
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}
+
+

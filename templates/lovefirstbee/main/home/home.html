@@ -1,0 +1,125 @@
+{% extends 'base_main.html' %}
+
+{% load static %}
+{% block title %}
+    {{ block.super }}
+    首页
+{% endblock %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lovefirstbee/main/home/css/swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'lovefirstbee/main/home/css/home.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'lovefirstbee/main/home/js/swiper.jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lovefirstbee/main/home/js/home.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="home">
+
+        <div class="swiper-container" id="topSwiper">
+            <div class="swiper-wrapper">
+                {% for wheel in wheels %}
+                    <a href="#" class="swiper-slide"><img src="/static{{ wheel.img }}" alt=""></a>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="topMenu">
+            <nav>
+                <ul>
+                    {% for nav in navs %}
+                        <li>
+                            <img src="/static{{ nav.img }}" alt="">
+                            <span>{{ nav.name }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="swiper-container" id="swiperMenu" style="height:90px;">
+
+            <ul class="swiper-wrapper">
+
+                {% for mustbuy in mustbuys %}
+                    <li class="swiper-slide"><img src="/static{{ mustbuy.img }}"></li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <div class="mainInfo">
+            <section><a href=""></a></section>
+        </div>
+        {% for mainshow in mainshows %}
+            <div class="mainInfo">
+                <section>
+                    <h3>
+                        {{ mainshow.name }}
+                        <span>
+                        </span>
+                        <a href="">sthmore></a>
+                    </h3>
+                    <div>
+                        <a href="">
+                            <img src="/static{{ mainshow.img }}" alt="">
+                        </a>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="">
+                                <img src="/static{{ mainshow.img1 }}" alt="">
+                                <span class="description">{{ mainshow.longname1 }}</span>
+                                <span>￥{{ mainshow.price1 }}</span><s>￥{{ mainshow.marketprice1 }}</s>
+                            </a>
+                            <button>
+                                <span>
+                                    +
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/static{{ mainshow.img2 }}" alt="">
+                                <span class="description">{{ mainshow.longname2 }}</span>
+
+                                <span>￥{{ mainshow.price2 }}</span><s>￥{{ mainshow.marketprice2 }}</s>
+                            </a>
+                            <button>
+                                <span>
+                                    +
+                                </span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/static{{ mainshow.img3 }}" alt="">
+                                <span class="description">{{ mainshow.longname3 }}</span>
+
+                                <span>￥{{ mainshow.price3 }}</span><s>￥{{ mainshow.marketprice3 }}</s>
+                            </a>
+                            <button>
+                                <span>
+                                    +
+                                </span>
+                            </button>
+                        </li>
+
+                    </ul>
+                </section>
+
+            </div>
+
+        {% endfor %}
+        <div style="height: 71.25px;"></div>
+
+    </div>
+{% endblock %}

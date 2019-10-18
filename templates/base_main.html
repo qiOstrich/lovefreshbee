@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lovefirstbee/main/css/main.css' %}">
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    <div style="height: 71.25px">
+        <header></header>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {{ block.super }}
+    <footer>
+        <a href="{% url 'homeApp:home' %}" class="home">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>
+                    首页
+                </dd>
+            </dl>
+        </a>
+        <a href="{% url 'marketApp:market' %}" class="market">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>
+                    闪购
+                </dd>
+            </dl>
+        </a>
+        <a href="{% url 'cartApp:cart' %}" class="cart">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>
+                    购物车
+                </dd>
+            </dl>
+        </a>
+        <a href="{% url 'mineApp:mine' %}" class="mine">
+            <dl>
+                <dt>
+                    <span></span>
+                </dt>
+                <dd>
+                    我的
+                </dd>
+            </dl>
+        </a>
+    </footer>
+{% endblock %}

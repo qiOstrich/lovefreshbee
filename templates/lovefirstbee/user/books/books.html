@@ -1,0 +1,21 @@
+{% extends 'base_user.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+    订单
+{% endblock %}
+
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lovefirstbee/user/books/css/books.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    {{ block.super }}
+
+
+{% endblock %}
